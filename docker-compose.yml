@@ -1,8 +1,9 @@
+# docker-compose.yml - UH Groupings Vault - dev environment
 version: '3.8'
 services:
   vault:
     image: vault:latest
-    container_name: vault
+    container_name: groupings-vault
     ports:
       - "8200:8200"
     volumes:
