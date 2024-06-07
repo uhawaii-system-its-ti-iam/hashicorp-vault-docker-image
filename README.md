@@ -18,17 +18,41 @@ be needed later.
 
 ## Download this project
 
-1. Download this project to local host
-2. TBD
+Recommendation: download the project to a temporary working directory for
+easy cleanup.
 
-## Assumptions
-- The HOME environment variable is defined (true by default for linux and macOS). 
+Download this project to local host.
+
+### Linux/macOS Commands
+
+    mkdir gitclone
+    cd gitclone
+    git clone https://github.com/uhawaii-system-its-ti-iam/hashicorp-vault-docker-image.git
+
+### Windows Shell Commands
+
+    TBD
+
+## Initialize Dev Environment
+
+1. Change your working directory the downloaded project.
+2. Ensure init-localhost.sh permissions are set to executable.
+3. Ensure HOME is a defined. Define it to be your account's home directory if it needs to be defined.
+
+### Linux/macOS Commands
+
+    cd hashicorp-vault-docker-image
+    chmod +x init-localhost.sh
+    echo $HOME
+    ./init-localhost.sh
+
+### Windows Shell Commands
+
+    TBD
 
 ## Container Setup
 
-Define HOME if it is not defined in your OS by default, for now.
-
-Start the container, confirm that it is running.
+Start the container and confirm that it is running.
 
     docker-compose up -d
     docker ps

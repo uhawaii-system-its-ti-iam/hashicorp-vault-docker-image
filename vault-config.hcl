@@ -1,23 +1,24 @@
-# vault-config.hcl -
+# vault-config.hcl - configure vault for dev
 
-# Enable the web UI
+# Enable the web UI.
 ui = true
 
-# Vault server listener configuration
+# Vault server listener configuration.
+#  - TLS is disabled for simplicity in dev environments.
 listener "tcp" {
   address     = "0.0.0.0:8200"
-  tls_disable = 1  # TLS is disabled for simplicity in development environments
+  tls_disable = 1
 }
 
-# Configure the file storage backend
+# Configure the file storage backend.
 storage "file" {
   path = "/vault/data"
 }
 
-# Set the maximum lease TTL for all secrets
-default_lease_ttl = "768h"  # 32 days
-max_lease_ttl     = "768h"  # 32 days
+# Set the maximum lease TTL for all secrets to 32 days.
+default_lease_ttl = "768h"
+max_lease_ttl     = "768h"
 
-# API configuration
-api_addr = "http://127.0.0.1:8200"
+# API configuration.
+api_addr     = "http://127.0.0.1:8200"
 cluster_addr = "http://127.0.0.1:8201"
