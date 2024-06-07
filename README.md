@@ -1,67 +1,68 @@
-Build a docker image to run HashiCorp Vault for the dockerized UH Groupings 
-project.
+# Table of Contents
 
-# Preamble
+<!-- TOC -->
+* [Preamble](#preamble)
+* [Instructions](#instructions)
+  * [Linux/macOS](#linuxmacos)
+  * [Windows](#windows)
+  * [Vault Setup](#vault-setup)
+  * [Access Vault via the Web Interface](#access-vault-via-the-web-interface)
+    * [Set up the Grouper API password secret](#set-up-the-grouper-api-password-secret)
+    * [Set up the access policy for the groupings deployment](#set-up-the-access-policy-for-the-groupings-deployment)
+    * [Create the password access token for the groupings deployment](#create-the-password-access-token-for-the-groupings-deployment)
+* [Examples](#examples)
+  * [Dockerfile](#dockerfile)
+  * [fetch_secret.sh](#fetch_secretsh)
+* [Troubleshooting](#troubleshooting)
+  * [vault Error Head](#vault-error-head)
+<!-- TOC -->
 
-This is purely experimental at this point.
+# Overview
 
-The design goal is to implement a .vault in the developer home directory to 
-persistently store the Grouper API password used by the UH Groupings API.
+**_This is purely experimental at this point._**
 
-When the developer attempts to run the containerized UH Groupings project 
-the vault will supply the password.
+Deploy a docker container on a development localhost environment to run 
+HashiCorp Vault to contain secrets for a containerized UH Groupings development
+instance.
 
-# Instructions
+Implement a vault under the developer home directory to persistently store the 
+Grouper API password used by the UH Groupings API. When the developer attempts 
+to run the containerized UH Groupings project the vault will supply the 
+password.
 
-For now these instructions are for linux and macOS. Windows instructions will
-be needed later.
 
-## Download this project
 
-Recommendation: download the project to a temporary working directory for
-easy cleanup.
+# Installation
 
-Download this project to local host.
+Recommendation: download the project from GitHub to a temporary working 
+directory for easy cleanup.
 
-### Linux/macOS Commands
+## Linux/macOS
+
+Download the project.
 
     mkdir gitclone
     cd gitclone
     git clone https://github.com/uhawaii-system-its-ti-iam/hashicorp-vault-docker-image.git
 
-### Windows Shell Commands
-
-    TBD
-
-## Initialize Dev Environment
-
-1. Change your working directory the downloaded project.
-2. Ensure init-localhost.sh permissions are set to executable.
-3. Ensure HOME is a defined. Define it to be your account's home directory if it needs to be defined.
-
-### Linux/macOS Commands
+Prep env, start container.
 
     cd hashicorp-vault-docker-image
     chmod +x init-localhost.sh
-    echo $HOME
     ./init-localhost.sh
 
-### Windows Shell Commands
+## Windows
 
-    TBD
+Download the project.
 
-## Container Setup
+    mkdir gitclone
+    cd gitclone
+    git clone https://github.com/uhawaii-system-its-ti-iam/hashicorp-vault-docker-image.git
 
-Start the container and confirm that it is running.
+Prep env, start container.
 
-    docker-compose up -d
-    docker ps
-
-### Troubleshooting
-
-####  vault Error Head "https://registry-1.docker.io/v2/library/vault/manifests/latest": unauth...
-
-You must have a dockerhub access token.
+    cd hashicorp-vault-docker-image
+    ./init-localhost.bat
 
 ## Vault Setup
 
@@ -91,10 +92,11 @@ Use the web UI to manage secrets, policies, etc.
 
 ### Create the password access token for the groupings deployment
 
+# Examples
 
-## Example Use of Secret During an Application Image Deployment
+## Dockerfile
 
-### Dockerfile
+Use a Secret During an Application Image Deployment
 
     FROM rockylinux/rockylinux:latest
     
@@ -119,7 +121,7 @@ Use the web UI to manage secrets, policies, etc.
     # Command to execute the Bash script
     CMD ["/app/fetch_secret.sh"]
 
-### fetch_secret.sh
+## fetch_secret.sh
 
     #!/bin/bash
     
@@ -132,3 +134,11 @@ Use the web UI to manage secrets, policies, etc.
     api_password=$(echo $response | jq -r .data.data.GROUPER_API_PWD)
     
     echo "API Password: $api_password"
+
+# Troubleshooting
+
+## vault Error Head
+
+vault Error Head "https://registry-1.docker.io/v2/library/vault/manifests/latest": unauth...
+
+You must have a dockerhub access token.

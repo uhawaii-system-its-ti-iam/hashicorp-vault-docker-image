@@ -4,7 +4,7 @@
 
 # Check if HOME environment variable is not set.
 if [ -z "${HOME}" ]; then
-  echo "Error: the HOME environment variable is not set. Exiting."
+  echo "Error: the HOME environment variable is not set."
   exit 1
 fi
 
