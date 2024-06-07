@@ -13,17 +13,31 @@ the vault will supply the password.
 
 # Instructions
 
+For now these instructions are for linux and macOS. Windows instructions will
+be needed later.
+
+## Download this project
+
+1. Download this project to local host
+2. TBD
+
 ## Assumptions
-- The HOME environment variable is defined (true by default for linux and macOS)
+- The HOME environment variable is defined (true by default for linux and macOS). 
 
 ## Container Setup
 
-Define HOME if it is not defined by default, for now.
+Define HOME if it is not defined in your OS by default, for now.
 
 Start the container, confirm that it is running.
 
     docker-compose up -d
     docker ps
+
+### Troubleshooting
+
+####  vault Error Head "https://registry-1.docker.io/v2/library/vault/manifests/latest": unauth...
+
+You must have a dockerhub access token.
 
 ## Vault Setup
 
@@ -32,7 +46,7 @@ Start the container, confirm that it is running.
 or if it has been manually sealed.
 - The root token is not required to add and access secrets. It is used to 
 configure the vault, set up policies, enable authentication methods and secret 
-engines.
+engines. **However, it is needed to use the UI to manage the vault.**
 - For development only 1 unseal key is required, rather than the usual 2-3.
 
 
@@ -40,9 +54,19 @@ engines.
     vault operator init -key-shares=1 -key-threshold=1
     vault operator unseal <Unseal_Key>
 
-## Secrets Management
+## Access Vault via the Web Interface
 
-    vault kv put secret/uh-groupings/config GROUPER_API_PWD="s3cr3tpassword"
+Use the web UI to manage secrets, policies, etc.
+
+- Navigate to http://localhost:8200
+- Use the root token to log in.
+
+### Set up the Grouper API password secret
+
+### Set up the access policy for the groupings deployment
+
+### Create the password access token for the groupings deployment
+
 
 ## Example Use of Secret During an Application Image Deployment
 

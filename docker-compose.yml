@@ -1,18 +1,20 @@
 # docker-compose.yml - UH Groupings Vault - dev environment
-version: '3.8'
+
 services:
   vault:
     image: vault:latest
     container_name: groupings-vault
+    user: mhodges
     ports:
       - "8200:8200"
     volumes:
-      - ${HOME}/.vault/uhgroupings/data:/vault/data  # Persistent storage
-      - ${HOME}/.vault/uhgroupings/config:/vault/config  # Configuration files
+      - ${HOME}/.vault/uhgroupings/data:/vault/data                 # Persistent storage
+      - ${HOME}/.vault/uhgroupings/config:/vault/config             # Configuration files
+      - ./init-vault-config.sh:/usr/local/bin/init-vault-config.sh  # Mount the script into the container
     environment:
       VAULT_ADDR: http://0.0.0.0:8200
       VAULT_CONFIG_DIR: /vault/config
     cap_add:
       - IPC_LOCK
-    entrypoint: vault server
-    command: -config=/vault/config/vault-config.hcl
+    entrypoint: ["/usr/local/bin/init-vault-config.sh"]
+
