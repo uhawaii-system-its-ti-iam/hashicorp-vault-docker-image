@@ -12,6 +12,8 @@ REM Define HOME based on USERPROFILE.
 set HOME=%USERPROFILE%
 
 REM Create the necessary directories for Vault data and configuration.
+mkdir "%HOME%\.vault"
+mkdir "%HOME%\.vault\uhgroupings"
 mkdir "%HOME%\.vault\uhgroupings\data"
 mkdir "%HOME%\.vault\uhgroupings\config"
 

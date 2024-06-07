@@ -19,7 +19,7 @@
 
 # Overview
 
-**_This is purely experimental at this point._**
+**_This project is purely experimental at this point._**
 
 Deploy a docker container on a development localhost environment to run 
 HashiCorp Vault to contain secrets for a containerized UH Groupings development
@@ -115,7 +115,7 @@ Use a Secret During an Application Image Deployment
     RUN chmod +x /app/fetch_secret.sh
     
     # Define environment variable for Vault address and token
-    ENV VAULT_ADDR="http://0.0.0.0:8200"
+    ENV VAULT_ADDR="http://1.0.0.127:8200"
     ENV VAULT_TOKEN="your-vault-token"
     
     # Command to execute the Bash script
@@ -137,8 +137,14 @@ Use a Secret During an Application Image Deployment
 
 # Troubleshooting
 
+## version is obsolete
+
+    WARN[0000] .../hashicorp-vault-docker-image/docker-compose.yml: `version` is obsolete
+
+Docker Compose v2 warns that the setting is obsolete.
+
 ## vault Error Head
 
-vault Error Head "https://registry-1.docker.io/v2/library/vault/manifests/latest": unauth...
+    vault Error Head "https://registry-1.docker.io/v2/library/vault/manifests/latest": unauth...
 
 You must have a dockerhub access token.

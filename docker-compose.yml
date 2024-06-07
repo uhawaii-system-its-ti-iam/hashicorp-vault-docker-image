@@ -1,12 +1,9 @@
 # docker-compose.yml - UH Groupings Vault - dev environment
 
-version: '3.8'
-
 services:
   vault:
-    image: vault:latest
+    image: hashicorp/vault:latest
     container_name: groupings-vault
-    user: mhodges
     ports:
       - "8200:8200"
     volumes:
@@ -19,3 +16,9 @@ services:
       - IPC_LOCK
     entrypoint: vault server
     command: -config=/vault/config/vault-config.hcl
+    networks:
+      - groupings-vault
+
+networks:
+  groupings-vault:
+    driver: bridge

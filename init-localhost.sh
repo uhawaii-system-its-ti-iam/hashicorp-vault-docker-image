@@ -9,8 +9,8 @@ if [ -z "${HOME}" ]; then
 fi
 
 # Create the necessary directories for Vault data and configuration.
-mkdir -v ${HOME}/.vault/uhgroupings/data
-mkdir -v ${HOME}/.vault/uhgroupings/config
+mkdir -pv ${HOME}/.vault/uhgroupings/data
+mkdir -pv ${HOME}/.vault/uhgroupings/config
 
 # Copy the Vault configuration file to the appropriate directory.
 cp -v vault-config.hcl ${HOME}/.vault/uhgroupings/config

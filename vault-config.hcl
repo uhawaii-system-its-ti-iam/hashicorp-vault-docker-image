@@ -6,7 +6,7 @@ ui = true
 # Vault server listener configuration.
 #  - TLS is disabled for simplicity in dev environments.
 listener "tcp" {
-  address     = "0.0.0.0:8200"
+  address     = "127.0.0.0:8200"
   tls_disable = 1
 }
 
