@@ -1,11 +1,11 @@
 # Table of Contents
 
 <!-- TOC -->
-* [Preamble](#preamble)
-* [Instructions](#instructions)
+* [Overview](#overview)
+* [Installation](#installation)
   * [Linux/macOS](#linuxmacos)
   * [Windows](#windows)
-  * [Vault Setup](#vault-setup)
+  * [Vault Setup and Startup](#vault-setup-and-startup)
   * [Access Vault via the Web Interface](#access-vault-via-the-web-interface)
     * [Set up the Grouper API password secret](#set-up-the-grouper-api-password-secret)
     * [Set up the access policy for the groupings deployment](#set-up-the-access-policy-for-the-groupings-deployment)
@@ -14,6 +14,7 @@
   * [Dockerfile](#dockerfile)
   * [fetch_secret.sh](#fetch_secretsh)
 * [Troubleshooting](#troubleshooting)
+  * [version is obsolete](#version-is-obsolete)
   * [vault Error Head](#vault-error-head)
 <!-- TOC -->
 
@@ -64,7 +65,7 @@ Prep env, start container.
     cd hashicorp-vault-docker-image
     ./init-localhost.bat
 
-## Vault Setup
+## Vault Setup and Startup
 
 - **Be sure to save the unseal key and root token.**
 - The vault needs to be unsealed upon initialization, after a service restart,
@@ -78,6 +79,17 @@ engines. **However, it is needed to use the UI to manage the vault.**
     docker exec -it groupings-vault sh
     vault operator init -key-shares=1 -key-threshold=1
     vault operator unseal <Unseal_Key>
+
+# Security and Configuration
+
+## Create the Unseal Key and the Root Token
+
+And also open the vault.
+
+    docker exec -it vault sh
+    vault operator init
+    vault operator unseal <Unseal_Key>
+
 
 ## Access Vault via the Web Interface
 
