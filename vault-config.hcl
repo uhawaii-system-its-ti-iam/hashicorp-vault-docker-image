@@ -2,17 +2,19 @@
 
 # Enable the web UI.
 ui = true
+disable_mlock = true
 
 # Vault server listener configuration.
-#  - TLS is disabled for simplicity in dev environments.
+#  - okay to disable TLS in dev environments.
 listener "tcp" {
   address     = "127.0.0.0:8200"
-  tls_disable = 1
+  tls_disable = "true"
 }
 
 # Configure the file storage backend.
 storage "file" {
   path = "/vault/data"
+  node_id = "node1"
 }
 
 # Set the maximum lease TTL for all secrets to 32 days.

@@ -153,10 +153,16 @@ Use a Secret During an Application Image Deployment
 
     WARN[0000] .../hashicorp-vault-docker-image/docker-compose.yml: `version` is obsolete
 
-Docker Compose v2 warns that the setting is obsolete.
+Docker Compose v2 warns that the version setting is obsolete. Remove it from the docker-compose file.
 
 ## vault Error Head
 
     vault Error Head "https://registry-1.docker.io/v2/library/vault/manifests/latest": unauth...
 
-You must have a dockerhub access token.
+You must have a dockerhub access token in order to download docker images from Docker Hub.
+
+## connection refused
+
+    operator init -key-shares=1 -key-threshold=1
+    Get "http://127.0.0.1:8200/v1/sys/seal-status": dial tcp 127.0.0.1:8200: connect: connection refuse
+
