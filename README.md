@@ -31,8 +31,6 @@ Grouper API password used by the UH Groupings API. When the developer attempts
 to run the containerized UH Groupings project the vault will supply the 
 password.
 
-
-
 # Installation
 
 Recommendation: download the project from GitHub to a temporary working 
@@ -64,6 +62,9 @@ Prep env, start container.
 
     cd hashicorp-vault-docker-image
     ./init-localhost.bat
+    curl http://127.0.0.1:8200/v1/sys/health
+
+Use curl to confirm that the vault is running and is accessible.
 
 ## Vault Setup and Startup
 
