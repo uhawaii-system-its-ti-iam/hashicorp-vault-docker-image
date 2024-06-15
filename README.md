@@ -36,7 +36,7 @@ password.
 Recommendation: download the project from GitHub to a temporary working 
 directory for easy cleanup.
 
-## Linux/macOS
+## Linux/macOS/Windows
 
 Download the project.
 
@@ -45,26 +45,12 @@ Download the project.
     git clone https://github.com/uhawaii-system-its-ti-iam/hashicorp-vault-docker-image.git
 
 Prep env, start container.
+
+  For Windows, the chmod step is not applicable.
 
     cd hashicorp-vault-docker-image
     chmod +x init-localhost.sh
     ./init-localhost.sh
-
-## Windows
-
-Download the project.
-
-    mkdir gitclone
-    cd gitclone
-    git clone https://github.com/uhawaii-system-its-ti-iam/hashicorp-vault-docker-image.git
-
-Prep env, start container.
-
-    cd hashicorp-vault-docker-image
-    ./init-localhost.bat
-    curl http://127.0.0.1:8200/v1/sys/health
-
-Use curl to confirm that the vault is running and is accessible.
 
 ## Vault Setup and Startup
 
@@ -77,7 +63,6 @@ engines. **However, it is needed to use the UI to manage the vault.**
 - For development only 1 unseal key is required, rather than the usual 2-3.
 
 
-    docker exec -it groupings-vault sh
     vault operator init -key-shares=1 -key-threshold=1
     vault operator unseal <Unseal_Key>
 
@@ -167,3 +152,11 @@ You must have a dockerhub access token in order to download docker images from D
     operator init -key-shares=1 -key-threshold=1
     Get "http://127.0.0.1:8200/v1/sys/seal-status": dial tcp 127.0.0.1:8200: connect: connection refuse
 
+## vault needs to be reinitialized
+
+This requires starting over.
+
+1) Stop the container
+2) Delete the vault
+3) Start the container
+4) Initialize the vault.
