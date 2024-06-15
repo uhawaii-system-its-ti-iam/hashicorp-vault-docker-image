@@ -2,21 +2,16 @@
 
 services:
   vault:
-    image: hashicorp/vault:latest
+    image: hashicorp/vault:latest  # Consider using a specific version
     container_name: groupings-vault
     ports:
       - "8200:8200"
+    network_mode: "host"
     volumes:
-      - ${HOME}/.vault/uhgroupings/data:/vault/data  # Persistent storage
-      - ${HOME}/.vault/uhgroupings/config:/vault/config  # Configuration files
+      - ${HOME}/.vault/uhgroupings/data:/vault/data
+      - ${HOME}/.vault/uhgroupings/config:/vault/config
     environment:
       VAULT_ADDR: http://127.0.0.1:8200
       VAULT_CONFIG_DIR: /vault/config
     entrypoint: vault server
     command: -config=/vault/config/vault-config.hcl
-    networks:
-      - groupings-vault
-
-networks:
-  groupings-vault:
-    driver: bridge

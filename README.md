@@ -68,14 +68,15 @@ engines. **However, it is needed to use the UI to manage the vault.**
 
 # Security and Configuration
 
-## Create the Unseal Key and the Root Token
+## Set Up the Vault
 
-And also open the vault.
+Create the Unseal Key, the Root Token, and open the vault.
 
     docker exec -it vault sh
     vault operator init
     vault operator unseal <Unseal_Key>
 
+The vault must be unsealed before the UI will be operational.
 
 ## Access Vault via the Web Interface
 
@@ -157,6 +158,9 @@ You must have a dockerhub access token in order to download docker images from D
 This requires starting over.
 
 1) Stop the container
-2) Delete the vault
+2) Delete the vault (see below)
 3) Start the container
 4) Initialize the vault.
+
+
+    rm -rf ${HOME}/.vault/uhgroupings/data/*
