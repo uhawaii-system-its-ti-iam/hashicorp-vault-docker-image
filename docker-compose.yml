@@ -13,5 +13,7 @@ services:
     environment:
       VAULT_ADDR: http://127.0.0.1:8200
       VAULT_CONFIG_DIR: /vault/config
-    entrypoint: vault server
+    entrypoint:
+      - vault
+      - server
     command: -config=/vault/config/vault-config.hcl

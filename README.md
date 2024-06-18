@@ -54,29 +54,39 @@ Prep env, start container.
 
 ## Vault Setup and Startup
 
-- **Be sure to save the unseal key and root token.**
+- For development only 1 unseal key is required, rather than the usual 2-3.
 - The vault needs to be unsealed upon initialization, after a service restart,
 or if it has been manually sealed.
+- The vault must be unsealed before the UI will be operational.
 - The root token is not required to add and access secrets. It is used to 
 configure the vault, set up policies, enable authentication methods and secret 
-engines. **However, it is needed to use the UI to manage the vault.**
-- For development only 1 unseal key is required, rather than the usual 2-3.
+engines.
+
+The following can be executed from within docker desktop. 
+- navigate to the "containers" menu
+- select the stack "hashicorp-vault-docker-image"
+- expand it in order to select the image "groupings-vault". 
+- the "Logs" menu is the default, select the "Exec" menu to access the 
+container's command prompt enter the following:
 
 
     vault operator init -key-shares=1 -key-threshold=1
     vault operator unseal <Unseal_Key>
 
-# Security and Configuration
+Be sure to save the unseal key and root token for later use.
 
-## Set Up the Vault
+Ensure that the key-value secrets engine is installed:
 
-Create the Unseal Key, the Root Token, and open the vault.
+    vault login
+    vault secrets enable -path=secret kv-v2
+    vault secrets list 
 
-    docker exec -it vault sh
-    vault operator init
-    vault operator unseal <Unseal_Key>
+## Store the Grouper API Password
 
-The vault must be unsealed before the UI will be operational.
+Replace the sample password with the actual password.
+
+    vault kv put secret/uhgroupings grouperClient.webService.password=samplepwd
+    vault kv get -format=json secret/uhgroupings
 
 ## Access Vault via the Web Interface
 

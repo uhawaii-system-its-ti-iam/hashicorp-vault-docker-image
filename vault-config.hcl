@@ -7,7 +7,7 @@ disable_mlock = true
 # Vault server listener configuration.
 #  - okay to disable TLS in dev environments.
 listener "tcp" {
-  address     = "127.0.0.1:8200"
+  address     = "0.0.0.0:8200"
   tls_disable = "true"
 }
 
@@ -23,4 +23,3 @@ max_lease_ttl     = "768h"
 
 # API configuration.
 api_addr     = "http://127.0.0.1:8200"
-cluster_addr = "http://127.0.0.1:8201"
