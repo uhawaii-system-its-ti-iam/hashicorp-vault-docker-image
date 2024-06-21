@@ -17,6 +17,14 @@ mkdir "%HOME%\.vault\uhgroupings"
 mkdir "%HOME%\.vault\uhgroupings\data"
 mkdir "%HOME%\.vault\uhgroupings\config"
 
+rem Check if the directory is not empty.
+dir /b /a "%HOME%\.vault\uhgroupings\data" | findstr "^" >nul
+if %ERRORLEVEL% EQU 0 (
+    echo Info: removed existing vault data to ensure a fresh init.
+    del /q /s "%HOME%\.vault\uhgroupings\data\*"
+    for /d %%x in ("%HOME%\.vault\uhgroupings\data\*") do @rd /s /q "%%x"
+)
+
 REM Copy the Vault configuration file to the appropriate directory.
 copy "vault-config.hcl" "%HOME%\.vault\uhgroupings\config"
 

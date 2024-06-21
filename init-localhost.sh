@@ -8,19 +8,25 @@ if [ -z "${HOME}" ]; then
   exit 1
 fi
 
-# Create the necessary directories for Vault data and configuration.
+# Create the necessary directories for vault data and configuration.
 mkdir -pv ${HOME}/.vault/uhgroupings/data
 mkdir -pv ${HOME}/.vault/uhgroupings/config
+
+# Ensure any previous vault data is removed to ensure a fresh init.
+if [ -n "$(ls -A ${HOME}/.vault/uhgroupings/data/)" ]; then
+  echo "Info: removed existing vault data to ensure a fresh init."
+  rm -rf ${HOME}/.vault/uhgroupings/data/*
+fi
 
 # Copy the Vault configuration file to the appropriate directory.
 cp -v vault-config.hcl ${HOME}/.vault/uhgroupings/config
 
-# Start the Vault container using Docker Compose.
+# Start the vault container using Docker Compose.
 docker-compose up -d
 
-# Check if Docker Compose started successfully.
+# Check if vault started successfully.
 if [ $? -eq 0 ]; then
-  echo "Success: the vault container started successfully."
+  echo "Success: the vault container has started. See README for more instructions."
 else
   echo "Error: failed to start the Vault container."
   exit 1
