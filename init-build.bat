@@ -1,6 +1,6 @@
 @echo off
 
-REM init-localhost.bat - Initialize for running vault.
+REM init-build.bat - Initialize for running vault.
 
 REM Check if USERPROFILE environment variable is not set.
 if "%USERPROFILE%"=="" (
