@@ -8,6 +8,12 @@ if "%USERPROFILE%"=="" (
   exit /b 1
 )
 
+REM Check if USERPROFILE environment variable is not set.
+if "%USERPROFILE%"=="" (
+  echo Error: the USERPROFILE environment variable is not set.
+  exit /b 1
+)
+
 REM Define HOME based on USERPROFILE.
 set HOME=%USERPROFILE%
 
